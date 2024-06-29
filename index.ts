@@ -83,3 +83,4 @@ export const deck: Card[] =
     );
 
 console.log(deck.map(c => c.toString()));
+console.log(deck.length);
