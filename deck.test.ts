@@ -1,6 +1,13 @@
 import assert from "node:assert";
 import test from "node:test";
-import { Card, Color, deck, getShuffledDeck, NumberedCard, WildDraw4Card } from "./deck.ts";
+import {
+    Card,
+    Color,
+    deck,
+    getShuffledDeck,
+    NumberedCard,
+    WildDraw4Card,
+} from "./deck.ts";
 
 test("Deck should have 108 cards", () => {
     assert.equal(deck.length, 108);
@@ -25,4 +32,4 @@ test("A card should be equal to itself", () => {
 test("Should shuffle the deck", () => {
     const shuffledDeck = getShuffledDeck();
     assert.notEqual(deck, shuffledDeck);
-})
+});
