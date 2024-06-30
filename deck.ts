@@ -106,7 +106,7 @@ export class WildDraw4Card extends Card {
     }
 }
 
-export const deck: Card[] = (allColoredNumberedCards as Card[])
+export const deck: readonly Card[] = (allColoredNumberedCards as Card[])
     .concat(
         allColoredNonZeroNumberedCards,
         allColoredSpecialCards,
@@ -114,3 +114,12 @@ export const deck: Card[] = (allColoredNumberedCards as Card[])
         Array(4).fill(new WildCard()),
         Array(4).fill(new WildDraw4Card()),
     );
+
+export function getShuffledDeck() {
+    const shuffledDeck = deck.slice(0);
+    for (let i = shuffledDeck.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledDeck[i], shuffledDeck[j]] = [shuffledDeck[j], shuffledDeck[i]];
+    }
+    return shuffledDeck;
+}
