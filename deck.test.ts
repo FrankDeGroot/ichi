@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import test from "node:test";
-import { Card, deck } from "./deck.ts";
+import { Card, deck, getShuffledDeck } from "./deck.ts";
 
 test("Deck should have 108 cards", () => {
     assert.equal(deck.length, 108);
@@ -18,13 +18,17 @@ test("Card should have toString", () => {
     );
 });
 
-// test("A card should be equal to itself", () => {
-//     assert.equal(deck.find(getBlue1), deck.findLast(getBlue1));
-//     const isWildDraw4Card = (c: Card) => c instanceof WildDraw4Card;
-//     assert.equal(deck.find(isWildDraw4Card), deck.findLast(isWildDraw4Card));
-// });
+test("A digit card should be equal to itself", () => {
+    assert.equal(deck.find(getBlue1), deck.findLast(getBlue1));
+});
 
-// test("Should shuffle the deck", () => {
-//     const shuffledDeck = getShuffledDeck();
-//     assert.notEqual(deck, shuffledDeck);
-// });
+test("A wildcard should be equal to itself", () => {
+    const isWildDraw4Card = (c: Card) =>
+        "wildcard" in c && c.wildcard === "Draw4";
+    assert.equal(deck.find(isWildDraw4Card), deck.findLast(isWildDraw4Card));
+});
+
+test("Should shuffle the deck", () => {
+    const shuffledDeck = getShuffledDeck();
+    assert.notEqual(deck, shuffledDeck);
+});
