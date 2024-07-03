@@ -11,10 +11,10 @@ function getBlue1(card: Card) {
         "digit" in card && card.digit === 1;
 }
 
-test("Card should have toString", () => {
-    assert.equal(
-        JSON.stringify(deck.find(getBlue1)),
-        JSON.stringify({ color: "Blue", digit: 1 }),
+test("Digit card should have equivalent JSON", () => {
+    assert.deepEqual(
+        deck.find(getBlue1),
+        { color: "Blue", digit: 1 },
     );
 });
 
