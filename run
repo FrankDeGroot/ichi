@@ -1,2 +1,2 @@
 #!/bin/sh
-deno run --allow-net --allow-read=web server.ts
+deno run --allow-net --allow-read=web api/server.ts --watch

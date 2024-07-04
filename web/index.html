@@ -1,22 +1,21 @@
 <html>
-    <head>
-        <title>Ichi</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width">
-        <link rel="stylesheet" href="index.css">
-        <script type="module" src="index.js"></script>
-        <script>
-            window.onerror = (message, source, line, column, error) => {
-                document.body.innerHTML = `<main>${message} ${source}:${line}:${column}<main>`
-                return true
-            }
-        </script>
-    </head>
-    <body>
-        <h1>Ichi</h1>
-        <div data="message"></div>
-        <button onclick="e => console.log('poo')">poo</button>
-        <button onclick="e => { console.log('start'); socket.send('start'); }">start</button>
-        <button onclick="e => socket.send('stop')">stop</button>
-    </body>
+  <head>
+    <title>Ichi</title>
+    <meta charset=utf-8>
+    <meta name=viewport content=width=device-width>
+    <link rel=stylesheet href=index.css>
+    <script>
+      window.onerror = (message, source, line, column, error) => {
+        document.body.innerHTML = `<main>${message} ${source}:${line}:${column}<main>`
+        return true
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Ichi</h1>
+    <div data=message></div>
+    <button id=start>start</button>
+    <button id=stop>stop</button>
+    <script type=module src=index.js></script>
+  </body>
 </html>
