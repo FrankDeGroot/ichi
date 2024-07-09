@@ -1,34 +1,21 @@
-export default class Clients {
-  readonly #sockets: WebSocket[] = [];
+import { Client, IClients } from "./client.ts";
 
-  upgrade(request: Request) {
-    const { socket, response } = Deno.upgradeWebSocket(request);
-    this.#connect(socket);
-    return response;
+/**
+ * Manages websocket connections to each client.
+ */
+export default class Clients implements IClients {
+  readonly #clients: Client[] = [];
+
+  connect(socket: WebSocket) {
+    const client = new Client(socket, this);
+    this.#add(client);
   }
 
-  #connect(socket: WebSocket) {
-    socket.onopen = () => this.#add(socket);
-    socket.onmessage = (e: MessageEvent<string>) => {
-      console.log(e.data);
-      this.#send(`echoing ${e.data}`);
-    };
-    socket.onerror = (e) => {
-      console.warn("socket errored:", e);
-      this.#remove(socket);
-    };
-    socket.onclose = () => this.#remove(socket);
+  #add(client: Client) {
+    this.#clients.push(client);
   }
 
-  #add(socket: WebSocket) {
-    this.#sockets.push(socket);
-  }
-
-  #remove(socket: WebSocket) {
-    this.#sockets.splice(this.#sockets.indexOf(socket), 1);
-  }
-
-  #send(data: Parameters<WebSocket["send"]>[0]) {
-    this.#sockets.forEach((socket) => socket.send(data));
+  remove(client: Client) {
+    this.#clients.splice(this.#clients.indexOf(client), 1);
   }
 }

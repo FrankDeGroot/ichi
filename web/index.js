@@ -1,4 +1,4 @@
-const { protocol, host } = window.location;
+const { protocol, host } = location;
 const socket = new WebSocket(
   `ws${protocol.includes("s") ? "s" : ""}://${host}`,
 );

@@ -6,11 +6,15 @@ const clients = new Clients();
 Deno.serve(async (request) => {
   try {
     console.debug(request.url);
-    return request.headers.get("upgrade")?.toLowerCase() === "websocket"
-      ? clients.upgrade(request)
-      : await serveDir(request, {
+    if (request.headers.get("upgrade")?.toLowerCase() === "websocket") {
+      const { socket, response } = Deno.upgradeWebSocket(request);
+      clients.connect(socket);
+      return response;
+    } else {
+      return await serveDir(request, {
         fsRoot: "web",
       });
+    }
   } catch (e) {
     console.error(e.message);
     return new Response(undefined, {
