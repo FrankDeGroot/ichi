@@ -1,7 +1,11 @@
+import IClient from './iclient.ts';
+import IClients from './iclients.ts';
+import { Message } from "./message.ts";
+
 /**
  * Wraps a websocket for RPC-features.
  */
-export class Client {
+export default class Client implements IClient {
   readonly #webSocket: WebSocket;
   readonly #clients: IClients;
 
@@ -18,15 +22,12 @@ export class Client {
     };
     this.#webSocket.onclose = () => this.#clients.remove(this);
   }
-}
 
-/**
- * Interface expected by a client to have it removed from the list.
- */
-export interface IClients {
-  /**
-   * Remove client from list.
-   * @param client Client to remove.
-   */
-  remove(client: Client): void;
+  send(message: Message): void {
+    this.#webSocket.send(JSON.stringify(message));
+  }
+
+  broadcast(message: Message): void {
+    this.#clients.broadcast(message);
+  }
 }

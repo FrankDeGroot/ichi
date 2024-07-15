@@ -31,7 +31,7 @@ function duplicate<T>(count: number, array: T[]) {
   return Array(count).fill(array).flatMap((o) => o);
 }
 
-export const deck: readonly Card[] = (allDigitCards as Card[])
+export const deck: readonly Card[] = allDigitCards
   .concat(
     allNonZeroDigitCards,
     duplicate(2, allColoredSpecialCards),
