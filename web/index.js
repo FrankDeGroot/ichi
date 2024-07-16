@@ -26,9 +26,5 @@ function announce(message) {
 }
 document.getElementById("start").addEventListener(
   "click",
-  (_) => socket.send("start"),
-);
-document.getElementById("stop").addEventListener(
-  "click",
-  (_) => socket.send("stop"),
+  (_) => socket.send(JSON.stringify("start")),
 );
