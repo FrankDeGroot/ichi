@@ -1,16 +1,25 @@
 import { Card, getShuffledDeck } from "./deck.ts";
 
-class Hand {
+export class Hand {
   #cards: Card[];
 
   constructor(cards: Card[]) {
     this.#cards = cards;
   }
 
-  //TODO filter discardable cards.
+  discardable(top: Card): Card[] {
+    return this.#cards.filter(card =>
+      "color" in top &&
+      "color" in card &&
+      top.color === card.color ||
+      "digit" in top &&
+      "digit" in card &&
+      top.digit === card.digit
+    );
+  }
 }
 
-class DrawPile {
+export class DrawPile {
   #cards: Card[];
 
   constructor(cards: Card[]) {
@@ -22,7 +31,7 @@ class DrawPile {
   }
 }
 
-class DiscardPile {
+export class DiscardPile {
   #cards: Card[];
 
   constructor(card: Card) {
@@ -38,7 +47,7 @@ class DiscardPile {
   }
 }
 
-class Player {
+export class Player {
   #hand: Hand | undefined;
 
   constructor() {
@@ -49,7 +58,7 @@ class Player {
   }
 }
 
-class Game {
+export class Game {
   #players: Player[];
   #drawPile: DrawPile;
   #discardPile: DiscardPile;

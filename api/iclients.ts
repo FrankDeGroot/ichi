@@ -1,5 +1,5 @@
+import { BroadcastMessage } from "./broadcast-message.ts";
 import IClient from "./iclient.ts";
-import { Message } from "./message.ts";
 
 /**
  * Interface expected by a client to have it removed from the list.
@@ -13,5 +13,5 @@ export default interface IClients {
   /**
    * Broadcast message to all connected clients.
    */
-  broadcast(message: Message): void;
+  broadcast(message: BroadcastMessage): void;
 }

@@ -1,6 +1,7 @@
-import { Message } from "./message.ts";
+import { BroadcastMessage } from "./broadcast-message.ts";
+import { ServerMessage } from "./server-message.ts";
 
 export default interface IClient {
-  send(message: Message): void;
-  broadcast(message: Message): void;
+  send(message: ServerMessage): void;
+  broadcast(message: BroadcastMessage): void;
 }
