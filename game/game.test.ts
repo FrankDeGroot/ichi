@@ -1,7 +1,6 @@
 import assert from "node:assert";
 import test from "node:test";
 import { Hand } from "./game.ts";
-import { setUncaughtExceptionCaptureCallback } from "node:process";
 
 test("Same digit discardable", () => {
   const hand = new Hand([{
