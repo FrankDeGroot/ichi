@@ -14,7 +14,10 @@ export class Hand {
       top.color === card.color ||
       "digit" in top &&
       "digit" in card &&
-      top.digit === card.digit
+      top.digit === card.digit ||
+      "specialCard" in top &&
+      "specialCard" in card &&
+      top.specialCard == card.specialCard
     );
   }
 }
