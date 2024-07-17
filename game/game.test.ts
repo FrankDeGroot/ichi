@@ -53,3 +53,16 @@ test("Same specialCard", () => {
     color: "Red", specialCard: "Draw2"
   }])
 });
+
+test("Wildcards are always discardable", () => {
+  const hand = new Hand([{
+    color: "Red", specialCard: "Draw2"
+  }, {
+    wildcard: "Wild"
+  }]);
+  assert.deepEqual(hand.discardable({
+    color: "Yellow", digit: 1
+  }), [{
+    wildcard: "Wild"
+  }])
+});

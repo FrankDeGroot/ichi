@@ -17,7 +17,8 @@ export class Hand {
       top.digit === card.digit ||
       "specialCard" in top &&
       "specialCard" in card &&
-      top.specialCard == card.specialCard
+      top.specialCard == card.specialCard ||
+      "wildcard" in card
     );
   }
 }
