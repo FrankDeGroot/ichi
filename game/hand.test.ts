@@ -1,9 +1,10 @@
 import assert from "node:assert";
 import test from "node:test";
-import { Hand } from "./game.ts";
+import Hand from "./hand.ts";
 
 test("Same digit discardable", () => {
-  const hand = new Hand([{
+  const hand = new Hand()
+  hand.add([{
     color: "Red", digit: 1
   }, {
     color: "Blue", digit: 2
@@ -16,7 +17,8 @@ test("Same digit discardable", () => {
 });
 
 test("Same color discardable for digit cards", () => {
-  const hand = new Hand([{
+  const hand = new Hand()
+  hand.add([{
     color: "Red", digit: 1
   }, {
     color: "Blue", digit: 2
@@ -29,7 +31,8 @@ test("Same color discardable for digit cards", () => {
 });
 
 test("Same color discardable for special cards", () => {
-  const hand = new Hand([{
+  const hand = new Hand();
+  hand.add([{
     color: "Red", specialCard: "Draw2"
   }, {
     color: "Blue", specialCard: "Reverse"
@@ -38,11 +41,12 @@ test("Same color discardable for special cards", () => {
     color: "Red", digit: 1
   }), [{
     color: "Red", specialCard: "Draw2"
-  }])
+  }]);
 });
 
 test("Same specialCard", () => {
-  const hand = new Hand([{
+  const hand = new Hand();
+  hand.add([{
     color: "Red", specialCard: "Draw2"
   }, {
     color: "Blue", specialCard: "Reverse"
@@ -51,11 +55,12 @@ test("Same specialCard", () => {
     color: "Yellow", specialCard: "Draw2"
   }), [{
     color: "Red", specialCard: "Draw2"
-  }])
+  }]);
 });
 
 test("Wildcards are always discardable", () => {
-  const hand = new Hand([{
+  const hand = new Hand();
+  hand.add([{
     color: "Red", specialCard: "Draw2"
   }, {
     wildcard: "Wild"
@@ -64,5 +69,5 @@ test("Wildcards are always discardable", () => {
     color: "Yellow", digit: 1
   }), [{
     wildcard: "Wild"
-  }])
+  }]);
 });
