@@ -3,12 +3,11 @@ import test from "node:test";
 import Hand from "./hand.ts";
 
 test("Same digit discardable", () => {
-  const hand = new Hand()
-  hand.add([{
+  const hand = new Hand([{
     color: "Red", digit: 1
   }, {
     color: "Blue", digit: 2
-  }]);
+  }])
   assert.deepEqual(hand.discardable({
     color: "Green", digit: 2
   }), [{
@@ -17,12 +16,11 @@ test("Same digit discardable", () => {
 });
 
 test("Same color discardable for digit cards", () => {
-  const hand = new Hand()
-  hand.add([{
+  const hand = new Hand([{
     color: "Red", digit: 1
   }, {
     color: "Blue", digit: 2
-  }]);
+  }])
   assert.deepEqual(hand.discardable({
     color: "Red", digit: 3
   }), [{
@@ -31,8 +29,7 @@ test("Same color discardable for digit cards", () => {
 });
 
 test("Same color discardable for special cards", () => {
-  const hand = new Hand();
-  hand.add([{
+  const hand = new Hand([{
     color: "Red", specialCard: "Draw2"
   }, {
     color: "Blue", specialCard: "Reverse"
@@ -45,8 +42,7 @@ test("Same color discardable for special cards", () => {
 });
 
 test("Same specialCard", () => {
-  const hand = new Hand();
-  hand.add([{
+  const hand = new Hand([{
     color: "Red", specialCard: "Draw2"
   }, {
     color: "Blue", specialCard: "Reverse"
@@ -59,8 +55,7 @@ test("Same specialCard", () => {
 });
 
 test("Wildcards are always discardable", () => {
-  const hand = new Hand();
-  hand.add([{
+  const hand = new Hand([{
     color: "Red", specialCard: "Draw2"
   }, {
     wildcard: "Wild"
@@ -70,4 +65,18 @@ test("Wildcards are always discardable", () => {
   }), [{
     wildcard: "Wild"
   }]);
+});
+
+test("Should add cards", () => {
+  const hand = new Hand([{
+    color: "Red", digit: 1
+  }]);
+  hand.add([{
+    color: "Blue", digit: 1
+  }]);
+  assert.deepEqual(hand.discardable({
+    color: "Blue", digit: 2
+  }), [{
+    color: "Blue", digit: 1
+  }])
 });

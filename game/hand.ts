@@ -1,7 +1,11 @@
 import { Card } from "./deck.ts";
 
 export default class Hand {
-  #cards: Card[] = [];
+  #cards;
+
+  constructor(cards: Card[]) {
+    this.#cards = cards;
+  }
 
   add(cards: Card[]) {
     this.#cards.push(...cards);

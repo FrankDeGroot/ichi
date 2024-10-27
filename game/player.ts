@@ -3,10 +3,10 @@ import DrawPile from "./draw_pile.ts";
 import Hand from "./hand.ts";
 
 export default class Player {
-  #hand: Hand = new Hand();
+  #hand;
 
-  hand(cards: Card[]) {
-    this.#hand.add(cards);
+  constructor(hand: Hand) {
+    this.#hand = hand;
   }
 
   turn(top: Card): Card {
