@@ -14,4 +14,8 @@ export default class DiscardPile {
   discard(card: Card) {
     this.#cards.push(card);
   }
+
+  reuse(): Card[] {
+    return this.#cards.splice(0, this.#cards.length - 1);
+  }
 }

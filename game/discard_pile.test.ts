@@ -22,3 +22,20 @@ test("Should discard to top of pile", () => {
     color: "Red", digit: 2
   })
 });
+
+test("Should reuse all cards except the top", () => {
+  const pile = new DiscardPile({
+    color: "Red", digit: 3
+  });
+  pile.discard({
+    color: "Red", digit: 2
+  });
+  pile.discard({
+    color: "Red", digit: 1
+  });
+  assert.deepEqual(pile.reuse(), [{
+    color: "Red", digit: 3
+  }, {
+    color: "Red", digit: 2
+  }])
+});

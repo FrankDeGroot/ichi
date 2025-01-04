@@ -1,20 +1,19 @@
 import { Card } from "./deck.ts";
+import DiscardPile from "./discard_pile.ts";
 
 export default class DrawPile {
-  #cards: Card[];
-  #onEmpty: () => Card[];
+  #cards;
+  #discardPile;
 
-  constructor(cards: Card[], onEmpty: () => Card[]) {
+  constructor(cards: Card[], discardPile: DiscardPile) {
     this.#cards = cards;
-    this.#onEmpty = onEmpty;
+    this.#discardPile = discardPile;
   }
 
   draw() {
-    let card = this.#cards.pop();
-    while (!card) {
-      this.#cards = this.#onEmpty();
-      card = this.#cards.pop();
+    if (!this.#cards.length) {
+      this.#cards = this.#discardPile.reuse();
     }
-    return card;
+    return this.#cards.pop() as Card;
   }
 }

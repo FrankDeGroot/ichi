@@ -7,8 +7,12 @@ export default class Hand {
     this.#cards = cards;
   }
 
-  add(cards: Card[]) {
-    this.#cards.push(...cards);
+  add(cards: Card[] | Card) {
+    if (Array.isArray(cards)) {
+      this.#cards.push(...cards);
+    } else {
+      this.#cards.push(cards);
+    }
   }
 
   discardable(top: Card): Card[] {
