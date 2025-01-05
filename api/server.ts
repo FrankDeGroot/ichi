@@ -10,13 +10,12 @@ Deno.serve(async (request) => {
       const { socket, response } = Deno.upgradeWebSocket(request);
       clients.connect(socket);
       return response;
-    } else {
-      return await serveDir(request, {
-        fsRoot: "web",
-      });
     }
-  } catch (e) {
-    console.error(e.message);
+    return await serveDir(request, {
+      fsRoot: "web",
+    });
+  } catch (e: unknown) {
+    if (e instanceof Error) console.error(e.message);
     return new Response(undefined, {
       status: 500,
     });

@@ -9,5 +9,8 @@
 			]
 		}
 	},
+	"runArgs": [
+		"--name=vscode-deno-ichi"
+	],
 	"postCreateCommand": "deno install"
 }
