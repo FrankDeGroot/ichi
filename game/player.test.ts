@@ -32,12 +32,31 @@ test("Should draw a card when none discardable", () => {
   const discardPile = new DiscardPile({
     color: "Red", digit: 2
   });
-  const player = new Player(hand, new DrawPile([{
-    color: "Blue", digit: 3
-  }], discardPile), discardPile);
+  const drawPile = new DrawPile([{
+    color: "Yellow", digit: 3
+  }], discardPile)
+  const player = new Player(hand, drawPile, discardPile);
   player.turn();
-  console.log(discardPile.peekTop());
-  assert.deepEqual(hand.discardable(discardPile.peekTop()), [{
+  assert.deepEqual(hand.discardable({
+    color: "Yellow", digit: 4
+  }), [{
+    color: "Yellow", digit: 3
+  }])
+});
+
+test("Should draw a card when none discardable and discard it if discardable", () => {
+  const hand = new Hand([{
     color: "Blue", digit: 1
   }]);
+  const discardPile = new DiscardPile({
+    color: "Red", digit: 2
+  });
+  const drawPile = new DrawPile([{
+    color: "Red", digit: 3
+  }], discardPile)
+  const player = new Player(hand, drawPile, discardPile);
+  player.turn();
+  assert.deepEqual(discardPile.peekTop(), {
+    color: "Red", digit: 3
+  })
 });

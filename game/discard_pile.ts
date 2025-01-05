@@ -1,4 +1,5 @@
 import { Card } from "./deck.ts";
+import { discardable } from "./discardable.ts";
 
 export default class DiscardPile {
   #cards: Card[];
@@ -12,6 +13,9 @@ export default class DiscardPile {
   }
 
   discard(card: Card) {
+    if (!discardable(card, this.peekTop())) {
+      throw new Error(`Attempt to discard ${card} on top of ${this.peekTop()}`);
+    }
     this.#cards.push(card);
   }
 

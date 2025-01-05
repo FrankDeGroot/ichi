@@ -17,10 +17,15 @@ export default class Player {
   turn() {
     const top = this.#discardPile.peekTop();
     const discardable = this.#hand.discardable(top);
-    if (discardable.length > 0) {
-      this.#discardPile.discard(discardable[0]);
+    if (!discardable.length) {
+      const drawn = this.#drawPile.draw()
+      this.#hand.add(drawn)
+      const discardable = this.#hand.discardable(top);
+      if (discardable.length) {
+        this.#discardPile.discard(discardable[0]);
+      }
     } else {
-      this.#hand.add(this.#drawPile.draw())
+      this.#discardPile.discard(discardable[0]);
     }
   }
 }

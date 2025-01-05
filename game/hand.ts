@@ -1,4 +1,5 @@
 import { Card } from "./deck.ts";
+import { discardable } from "./discardable.ts";
 
 export default class Hand {
   #cards;
@@ -16,17 +17,6 @@ export default class Hand {
   }
 
   discardable(top: Card): Card[] {
-    return this.#cards.filter(card =>
-      "color" in top &&
-      "color" in card &&
-      top.color === card.color ||
-      "digit" in top &&
-      "digit" in card &&
-      top.digit === card.digit ||
-      "specialCard" in top &&
-      "specialCard" in card &&
-      top.specialCard === card.specialCard ||
-      "wildcard" in card
-    );
+    return this.#cards.filter(card => discardable(card, top));
   }
 }

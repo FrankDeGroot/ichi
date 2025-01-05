@@ -19,13 +19,13 @@ test("Should reuse cards from discard pile when empty", () => {
     color: "Red", digit: 1
   });
   discardPile.discard({
-    color: "Blue", digit: 2
+    color: "Red", digit: 2
   });
   discardPile.discard({
-    color: "Green", digit: 3
+    color: "Red", digit: 3
   });
   const drawPile = new DrawPile([], discardPile);
   assert.deepEqual(drawPile.draw(), {
-    color: "Blue", digit: 2
+    color: "Red", digit: 2
   });
 })
