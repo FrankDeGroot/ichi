@@ -2,9 +2,9 @@ import assert from "node:assert";
 import test from "node:test";
 import { Card } from "./deck.ts";
 import Hand from "./hand.ts";
-import Player from "./player.ts";
-import DiscardPile from "./discard_pile.ts";
-import DrawPile from "./draw_pile.ts";
+import Player from "./auto-player.ts";
+import DiscardPile from "./discard-pile.ts";
+import DrawPile from "./draw-pile.ts";
 
 function newPlayer(cards: Card[], drawPile: DrawPile, discardPile: DiscardPile) {
   return new Player(new Hand(cards), drawPile, discardPile);

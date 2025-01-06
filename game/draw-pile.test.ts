@@ -1,7 +1,7 @@
 import assert from "node:assert";
 import { test } from "node:test";
-import DrawPile from "./draw_pile.ts";
-import DiscardPile from "./discard_pile.ts";
+import DrawPile from "./draw-pile.ts";
+import DiscardPile from "./discard-pile.ts";
 
 test("Should draw the top card of the pile", () => {
   const drawPile = new DrawPile([{

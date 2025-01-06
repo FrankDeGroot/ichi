@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import { test } from "node:test";
-import DiscardPile from "./discard_pile.ts";
+import DiscardPile from "./discard-pile.ts";
 
 test("Should allow peek top card", () => {
   const pile = new DiscardPile({

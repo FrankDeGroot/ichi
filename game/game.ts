@@ -1,7 +1,7 @@
 import { Card } from "./deck.ts";
-import DiscardPile from "./discard_pile.ts";
-import DrawPile from "./draw_pile.ts";
-import Player from "./player.ts";
+import DiscardPile from "./discard-pile.ts";
+import DrawPile from "./draw-pile.ts";
+import Player from "./auto-player.ts";
 
 // export class Game {
 //   #players: Player[];

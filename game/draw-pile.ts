@@ -1,5 +1,5 @@
 import { Card } from "./deck.ts";
-import DiscardPile from "./discard_pile.ts";
+import DiscardPile from "./discard-pile.ts";
 
 export default class DrawPile {
   #cards;

@@ -1,6 +1,5 @@
-import { Card } from "./deck.ts";
-import DiscardPile from "./discard_pile.ts";
-import DrawPile from "./draw_pile.ts";
+import DiscardPile from "./discard-pile.ts";
+import DrawPile from "./draw-pile.ts";
 import Hand from "./hand.ts";
 
 export default class Player {
