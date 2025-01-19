@@ -25,11 +25,11 @@ export default class Player {
     } else {
       const drawn = this.#drawPile.draw()
       // TODO Don't add this to the hand, check if it is discardable immediately and if so, discard it. Otherwise add it to the hand.
-      // this.#hand.add(drawn)
-      // const discard = this.#discarder(this.#hand, top);
-      // if (discard) {
-      //   this.#discardPile.discard(discard);
-      // }
+      this.#hand.add(drawn)
+      const discard = this.#discarder(this.#hand, top);
+      if (discard) {
+        this.#discardPile.discard(discard);
+      }
     }
   }
 }
