@@ -7,7 +7,6 @@ import IClient from "./iclient.ts";
 export default interface IClients {
   /**
    * Remove client from list.
-   * @param client Client to remove.
    */
   remove(client: IClient): void;
   /**

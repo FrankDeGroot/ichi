@@ -1,6 +1,7 @@
 import assert from "node:assert";
 import test from "node:test";
 import Hand from "./hand.ts";
+
 test("Should add cards", () => {
   const hand = new Hand([{
     color: "Red", digit: 1
@@ -13,4 +14,11 @@ test("Should add cards", () => {
   }), [{
     color: "Blue", digit: 1
   }])
+});
+
+test("Should flag an empty hand", () => {
+  const hand = new Hand([{
+    color: "Red", digit: 1
+  }]);
+  
 });

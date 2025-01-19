@@ -8,6 +8,10 @@ export default class Hand {
     this.#cards = cards;
   }
 
+  empty() {
+    return this.#cards.length === 0;
+  }
+
   add(cards: Card[] | Card) {
     if (Array.isArray(cards)) {
       this.#cards.push(...cards);
@@ -19,4 +23,8 @@ export default class Hand {
   discardable(top: Card): Card[] {
     return this.#cards.filter(card => discardable(card, top));
   }
+
+  // discard(card: Card) {
+  //   this.#cards.splice(this.#cards.indexOf())
+  // }
 }

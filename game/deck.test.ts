@@ -2,7 +2,6 @@ import assert from "node:assert";
 import test from "node:test";
 import { Card, deck, getShuffledDeck } from "./deck.ts";
 
-
 test("Deck should have 108 cards", () => {
   assert.equal(deck.length, 108);
 });

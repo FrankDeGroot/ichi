@@ -1,27 +1,28 @@
 import { Card } from "./deck.ts";
 import DiscardPile from "./discard-pile.ts";
 import DrawPile from "./draw-pile.ts";
-import Player from "./auto-player.ts";
+import Hand from "./hand.ts";
+import Player from "./player.ts";
 
-// export class Game {
-//   #players: Player[];
-//   #drawPile: DrawPile;
-//   #discardPile: DiscardPile;
+export class Game {
+  #players;
+  #drawPile;
+  #discardPile;
 
-//   constructor(players: Player[], deck: Card[]) {
-//     this.#players = players;
-//     this.#deal(deck);
-//     this.#discardPile = new DiscardPile(deck.pop() as Card);
-//     this.#drawPile = new DrawPile(deck, this.#onDrawPileEmpty);
-//   }
+  constructor(players: number, deck: Card[]) {
+    const initialCards = 7;
+    const handedCards = deck.splice(0, players * initialCards);
+    this.#discardPile = new DiscardPile(deck.pop() as Card)
+    this.#drawPile = new DrawPile(deck, this.#discardPile);
+    this.#players = Array.apply(null, Array(5)).map(() =>
+      new Player(new Hand(handedCards.splice(0, initialCards)),
+        this.#drawPile, this.#discardPile, (hand: Hand, top: Card) => {
+          const discardable = hand.discardable(top);
+          return discardable.length ? discardable[0] : null;
+        }));
+  }
 
-//   #deal(deck: Card[]) {
-//     for (const player of this.#players) {
-//       player.hand(deck.splice(0, 7));
-//     }
-//   }
-
-//   #onDrawPileEmpty() {
-//     return [];
-//   }
-// }
+  play() {
+    
+  }
+}
