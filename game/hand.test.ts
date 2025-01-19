@@ -17,8 +17,13 @@ test("Should add cards", () => {
 });
 
 test("Should flag an empty hand", () => {
+  const hand = new Hand([]);
+  assert.equal(hand.empty(), true);
+});
+
+test("Should not flag a non-empty hand", () => {
   const hand = new Hand([{
     color: "Red", digit: 1
   }]);
-  
+  assert.equal(hand.empty(), false);
 });
