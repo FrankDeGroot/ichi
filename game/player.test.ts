@@ -6,10 +6,10 @@ import Player from "./player.ts";
 import DiscardPile from "./discard-pile.ts";
 import DrawPile from "./draw-pile.ts";
 
-const naiveDiscarder = (hand: Hand, top: Card) => {
-    const discardable = hand.discardable(top);
-    return discardable.length ? discardable[0]: null;
-  }
+function naiveDiscarder(hand: Hand, top: Card) {
+  const discardable = hand.discardable(top);
+  return discardable.length ? discardable[0][1]: null;
+}
 
 test("Should discard a card", () => {
   const hand = new Hand([{
@@ -41,9 +41,9 @@ test("Should draw a card when none discardable", () => {
   player.turn();
   assert.deepEqual(hand.discardable({
     color: "Yellow", digit: 4
-  }), [{
+  }), [[{
     color: "Yellow", digit: 3
-  }])
+  }, 1]])
 });
 
 test("Should draw a card when none discardable and discard it if discardable", () => {

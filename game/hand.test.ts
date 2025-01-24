@@ -3,6 +3,12 @@ import test from "node:test";
 import Hand from "./hand.ts";
 
 test("Should add cards", () => {
+  const hand = new Hand([]);
+  hand.add({ color: "Blue", digit: 1 });
+  assert.equal(hand.empty(), false);
+});
+
+test("Should should return discardable cards", () => {
   const hand = new Hand([{
     color: "Red", digit: 1
   }]);
@@ -11,9 +17,9 @@ test("Should add cards", () => {
   }]);
   assert.deepEqual(hand.discardable({
     color: "Blue", digit: 2
-  }), [{
+  }), [[{
     color: "Blue", digit: 1
-  }])
+  }, 1]])
 });
 
 test("Should flag an empty hand", () => {

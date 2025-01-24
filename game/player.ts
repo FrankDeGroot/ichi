@@ -1,5 +1,6 @@
 import { Card } from "./deck.ts";
 import DiscardPile from "./discard-pile.ts";
+import { discardable } from "./discardable.ts";
 import DrawPile from "./draw-pile.ts";
 import Hand from "./hand.ts";
 
@@ -9,7 +10,7 @@ export default class Player {
   #discardPile;
   #discarder;
 
-  constructor(hand: Hand, drawPile: DrawPile, discardPile: DiscardPile, discarder: (hand: Hand, top: Card) => Card | null) {
+  constructor(hand: Hand, drawPile: DrawPile, discardPile: DiscardPile, discarder: (hand: Hand, top: Card) => number | null) {
     this.#hand = hand;
     this.#drawPile = drawPile;
     this.#discardPile = discardPile;
@@ -19,16 +20,14 @@ export default class Player {
   turn() {
     const top = this.#discardPile.peekTop();
     const discarded = this.#discarder(this.#hand, top);
-    // TODO Remove the card from the hand while discarding
-    if (discarded) {
-      this.#discardPile.discard(discarded);
+    if (discarded !== null) {
+      this.#discardPile.discard(this.#hand.discard(discarded));
     } else {
       const drawn = this.#drawPile.draw()
-      // TODO Don't add this to the hand, check if it is discardable immediately and if so, discard it. Otherwise add it to the hand.
-      this.#hand.add(drawn)
-      const discard = this.#discarder(this.#hand, top);
-      if (discard) {
-        this.#discardPile.discard(discard);
+      if (discardable(drawn, top)) {
+        this.#discardPile.discard(drawn);
+      } else {
+        this.#hand.add(drawn);
       }
     }
   }
