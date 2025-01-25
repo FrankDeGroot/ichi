@@ -15,7 +15,7 @@ export class Game {
     const handedCards = deck.splice(0, players * initialCards);
     this.#discardPile = new DiscardPile(deck.pop() as Card)
     this.#drawPile = new DrawPile(deck, this.#discardPile);
-    this.#players = Array.apply(null, Array(5)).map(() =>
+    this.#players = Array.apply(null, Array(players)).map(() =>
       new Player(new Hand(handedCards.splice(0, initialCards)),
         this.#drawPile, this.#discardPile, naiveDiscarder));
   }
