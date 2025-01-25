@@ -5,11 +5,7 @@ import Hand from "./hand.ts";
 import Player from "./player.ts";
 import DiscardPile from "./discard-pile.ts";
 import DrawPile from "./draw-pile.ts";
-
-function naiveDiscarder(hand: Hand, top: Card) {
-  const discardable = hand.discardable(top);
-  return discardable.length ? discardable[0][1]: null;
-}
+import { naiveDiscarder } from "./naive-discarder.ts";
 
 test("Should discard a card", () => {
   const hand = new Hand([{
