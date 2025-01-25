@@ -1,6 +1,5 @@
 import assert from "node:assert";
 import test from "node:test";
-import { Card } from "./deck.ts";
 import Hand from "./hand.ts";
 import Player from "./player.ts";
 import DiscardPile from "./discard-pile.ts";

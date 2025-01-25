@@ -2,6 +2,7 @@ import { Card } from "./deck.ts";
 import DiscardPile from "./discard-pile.ts";
 import DrawPile from "./draw-pile.ts";
 import Hand from "./hand.ts";
+import { naiveDiscarder } from "./naive-discarder.ts";
 import Player from "./player.ts";
 
 export class Game {
@@ -16,10 +17,7 @@ export class Game {
     this.#drawPile = new DrawPile(deck, this.#discardPile);
     this.#players = Array.apply(null, Array(5)).map(() =>
       new Player(new Hand(handedCards.splice(0, initialCards)),
-        this.#drawPile, this.#discardPile, (hand: Hand, top: Card) => {
-          const discardable = hand.discardable(top);
-          return discardable.length ? discardable[0] : null;
-        }));
+        this.#drawPile, this.#discardPile, naiveDiscarder));
   }
 
   play() {
