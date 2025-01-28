@@ -5,12 +5,14 @@ import DrawPile from "./draw-pile.ts";
 import Hand from "./hand.ts";
 
 export default class Player {
+  #name;
   #hand;
   #drawPile;
   #discardPile;
   #discarder;
 
-  constructor(hand: Hand, drawPile: DrawPile, discardPile: DiscardPile, discarder: (hand: Hand, top: Card) => number | null) {
+  constructor(name: string, hand: Hand, drawPile: DrawPile, discardPile: DiscardPile, discarder: (hand: Hand, top: Card) => number | null) {
+    this.#name = name;
     this.#hand = hand;
     this.#drawPile = drawPile;
     this.#discardPile = discardPile;
@@ -18,15 +20,21 @@ export default class Player {
   }
 
   turn() {
+    console.debug("Player", this.#name, "'s turn")
     const top = this.#discardPile.peekTop();
+    console.debug("Player", this.#name, "discards on top of", top)
     const discarded = this.#discarder(this.#hand, top);
     if (discarded !== null) {
+      console.debug("Player", this.#name, "discarding", discarded);
       this.#discardPile.discard(this.#hand.discard(discarded));
     } else {
       const drawn = this.#drawPile.draw()
+      console.debug("Player", this.#name, "drawing", drawn);
       if (discardable(drawn, top)) {
+        console.debug("Player", this.#name, "discards", drawn);
         this.#discardPile.discard(drawn);
       } else {
+        console.debug("Player", this.#name, "keeps", drawn);
         this.#hand.add(drawn);
       }
     }
