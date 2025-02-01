@@ -11,7 +11,13 @@ export default class Player {
   #discardPile;
   #discarder;
 
-  constructor(name: string, hand: Hand, drawPile: DrawPile, discardPile: DiscardPile, discarder: (hand: Hand, top: Card) => number | null) {
+  constructor(
+    name: string,
+    hand: Hand,
+    drawPile: DrawPile,
+    discardPile: DiscardPile,
+    discarder: (hand: Hand, top: Card) => [Card, number] | null
+  ) {
     this.#name = name;
     this.#hand = hand;
     this.#drawPile = drawPile;
@@ -25,8 +31,9 @@ export default class Player {
     console.debug("Player", this.#name, "discards on top of", top)
     const discarded = this.#discarder(this.#hand, top);
     if (discarded !== null) {
-      console.debug("Player", this.#name, "discarding", discarded);
-      this.#discardPile.discard(this.#hand.discard(discarded));
+      const [ card, index ] = discarded;
+      console.debug("Player", this.#name, "discarding", card);
+      this.#discardPile.discard(this.#hand.discard(index));
     } else {
       const drawn = this.#drawPile.draw()
       console.debug("Player", this.#name, "drawing", drawn);

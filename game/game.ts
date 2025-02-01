@@ -12,5 +12,8 @@ export class Game {
   }
 
   play() {
+    for(let i = 0; i < this.#players.length; i++) {
+      this.#players[i].turn();
+    }
   }
 }

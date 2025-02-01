@@ -7,5 +7,5 @@ import Hand from "./hand.ts";
  */
 export function naiveDiscarder(hand: Hand, top: Card) {
   const discardable = hand.discardable(top);
-  return discardable.length ? discardable[0][1]: null;
+  return discardable.length ? discardable[0]: null;
 }
