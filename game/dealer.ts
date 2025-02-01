@@ -5,7 +5,13 @@ import Hand from "./hand.ts";
 import { naiveDiscarder } from "./naive-discarder.ts";
 import Player from "./player.ts";
 
-export function deal(playerCount: number, deck: Card[]) {
+export type Dealing = {
+  discardPile: DiscardPile,
+  drawPile: DrawPile,
+  players: Player[],
+}
+
+export function deal(playerCount: number, deck: Card[]): Dealing {
   const initialCards = 7;
   const handedCards = deck.splice(0, playerCount * initialCards);
   const discardPile = new DiscardPile(deck.pop() as Card);
