@@ -6,10 +6,10 @@ import { naiveDiscarder } from "./naive-discarder.ts";
 import Player from "./player.ts";
 
 export type Dealing = {
-  discardPile: DiscardPile,
-  drawPile: DrawPile,
-  players: Player[],
-}
+  discardPile: DiscardPile;
+  drawPile: DrawPile;
+  players: Player[];
+};
 
 export function deal(playerCount: number, deck: Card[]): Dealing {
   const initialCards = 7;
@@ -28,6 +28,6 @@ export function deal(playerCount: number, deck: Card[]): Dealing {
   return {
     discardPile,
     drawPile,
-    players
+    players,
   };
 }
