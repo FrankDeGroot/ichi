@@ -25,6 +25,10 @@ export default class Player {
     this.#discarder = discarder;
   }
 
+  get name() {
+    return this.#name;
+  }
+
   turn() {
     console.debug("Player", this.#name, "'s turn");
     const top = this.#discardPile.peekTop();

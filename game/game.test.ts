@@ -16,41 +16,48 @@ test("Should play normal game", () => {
     color: "Red",
     digit: 2,
   }], discardPile);
+  const players = [
+    new Player(
+      "0",
+      new Hand([{
+        color: "Red",
+        digit: 3,
+      }, {
+        color: "Blue",
+        digit: 9,
+      }]),
+      drawPile,
+      discardPile,
+      naiveDiscarder,
+    ),
+    new Player(
+      "1",
+      new Hand([{
+        color: "Red",
+        digit: 4,
+      }, {
+        color: "Blue",
+        digit: 8,
+      }]),
+      drawPile,
+      discardPile,
+      naiveDiscarder,
+    ),
+    new Player(
+      "2",
+      new Hand([{
+        color: "Red",
+        digit: 5,
+      }]),
+      drawPile,
+      discardPile,
+      naiveDiscarder,
+    ),
+  ];
   const game = new Game({
     discardPile,
     drawPile,
-    players: [
-      new Player(
-        "0",
-        new Hand([{
-          color: "Red",
-          digit: 3,
-        }]),
-        drawPile,
-        discardPile,
-        naiveDiscarder,
-      ),
-      new Player(
-        "1",
-        new Hand([{
-          color: "Red",
-          digit: 4,
-        }]),
-        drawPile,
-        discardPile,
-        naiveDiscarder,
-      ),
-      new Player(
-        "2",
-        new Hand([{
-          color: "Red",
-          digit: 5,
-        }]),
-        drawPile,
-        discardPile,
-        naiveDiscarder,
-      ),
-    ],
+    players,
   });
-  game.play();
+  assert.strictEqual(game.play(), players[2]);
 });

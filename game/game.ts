@@ -12,8 +12,11 @@ export class Game {
   }
 
   play() {
-    for (let i = 0; i < this.#players.length; i++) {
-      this.#players[i].turn();
+    for (const player of this.#players) {
+      if (player.turn()) {
+        console.debug("Player", player.name, "won!");
+        return player;
+      }
     }
   }
 }
