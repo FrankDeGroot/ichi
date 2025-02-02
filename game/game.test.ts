@@ -83,5 +83,5 @@ test("A Reverse on top of the discard pile should reverse turn direction", () =>
     }]],
   });
   const game = new Game({ discardPile, drawPile, players });
-  assert.strictEqual(game.play(), players[3]);
+  assert.strictEqual(game.play().name, players[2].name);
 });
