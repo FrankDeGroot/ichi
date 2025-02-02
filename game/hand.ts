@@ -21,12 +21,15 @@ export default class Hand {
   }
 
   discardable(top: Card): [Card, number][] {
-    const indexedCards: [Card, number][] = this.#cards.map((card, index) => [card, index])
+    const indexedCards: [Card, number][] = this.#cards.map((
+      card,
+      index,
+    ) => [card, index]);
     return indexedCards.filter(([card, _]) => discardable(card, top));
   }
 
   discard(index: number): Card {
-    const discarded = this.#cards.splice(index, 1)
-    return discarded[0]
+    const discarded = this.#cards.splice(index, 1);
+    return discarded[0];
   }
 }

@@ -23,7 +23,7 @@ export default class Clients implements IClients {
   }
 
   broadcast(message: BroadcastMessage): void {
-    for(const client of this.#clients) {
+    for (const client of this.#clients) {
       client.send(message);
     }
   }

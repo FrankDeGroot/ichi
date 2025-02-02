@@ -10,16 +10,23 @@ test("Should add cards", () => {
 
 test("Should should return discardable cards", () => {
   const hand = new Hand([{
-    color: "Red", digit: 1
+    color: "Red",
+    digit: 1,
   }]);
   hand.add([{
-    color: "Blue", digit: 1
+    color: "Blue",
+    digit: 1,
   }]);
-  assert.deepEqual(hand.discardable({
-    color: "Blue", digit: 2
-  }), [[{
-    color: "Blue", digit: 1
-  }, 1]])
+  assert.deepEqual(
+    hand.discardable({
+      color: "Blue",
+      digit: 2,
+    }),
+    [[{
+      color: "Blue",
+      digit: 1,
+    }, 1]],
+  );
 });
 
 test("Should flag an empty hand", () => {
@@ -29,7 +36,8 @@ test("Should flag an empty hand", () => {
 
 test("Should not flag a non-empty hand", () => {
   const hand = new Hand([{
-    color: "Red", digit: 1
+    color: "Red",
+    digit: 1,
   }]);
   assert.equal(hand.empty(), false);
 });
