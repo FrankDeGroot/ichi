@@ -16,7 +16,7 @@ export default class Player {
     hand: Hand,
     drawPile: DrawPile,
     discardPile: DiscardPile,
-    discarder: (hand: Hand, top: Card) => [Card, number] | null
+    discarder: (hand: Hand, top: Card) => [Card, number] | null,
   ) {
     this.#name = name;
     this.#hand = hand;
@@ -26,16 +26,16 @@ export default class Player {
   }
 
   turn() {
-    console.debug("Player", this.#name, "'s turn")
+    console.debug("Player", this.#name, "'s turn");
     const top = this.#discardPile.peekTop();
-    console.debug("Player", this.#name, "discards on top of", top)
+    console.debug("Player", this.#name, "discards on top of", top);
     const discarded = this.#discarder(this.#hand, top);
     if (discarded !== null) {
-      const [ card, index ] = discarded;
+      const [card, index] = discarded;
       console.debug("Player", this.#name, "discarding", card);
       this.#discardPile.discard(this.#hand.discard(index));
     } else {
-      const drawn = this.#drawPile.draw()
+      const drawn = this.#drawPile.draw();
       console.debug("Player", this.#name, "drawing", drawn);
       if (discardable(drawn, top)) {
         console.debug("Player", this.#name, "discards", drawn);
@@ -45,5 +45,6 @@ export default class Player {
         this.#hand.add(drawn);
       }
     }
+    return this.#hand.empty();
   }
 }
