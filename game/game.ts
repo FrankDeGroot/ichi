@@ -1,5 +1,4 @@
 import { Dealing } from "./dealer.ts";
-import { SpecialCard } from "./deck.ts";
 
 export class Game {
   #discardPile;
@@ -16,11 +15,12 @@ export class Game {
     const up = 1;
     const down = this.#players.length - 1;
     const top = this.#discardPile.peekTop();
-    const direction = Object.hasOwn(top, "specialCard") &&
-        (top as SpecialCard).specialCard === "Reverse"
-      ? up
-      : down;
+    const direction = "specialCard" in top &&
+        top.specialCard === "Reverse"
+      ? down
+      : up;
     for (let i = 0;; i = (i + direction) % this.#players.length) {
+      console.debug("Playing direction", direction === up ? "up" : "down");
       const player = this.#players[i];
       if (player.turn()) {
         console.debug("Player", player.name, "won!");

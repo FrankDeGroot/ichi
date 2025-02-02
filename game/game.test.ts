@@ -74,6 +74,9 @@ test("A Reverse on top of the discard pile should reverse turn direction", () =>
     hands: [[{
       color: "Red",
       digit: 1,
+    }, {
+      color: "Blue",
+      digit: 1,
     }], [{
       color: "Red",
       digit: 2,
@@ -84,4 +87,10 @@ test("A Reverse on top of the discard pile should reverse turn direction", () =>
   });
   const game = new Game({ discardPile, drawPile, players });
   assert.strictEqual(game.play().name, players[2].name);
+});
+
+test("Discarding a reverse card should reverse direction once", () => {
+  // TODO Give player 0 a reverse card and a non-discardable card.
+  // Give player 1 and 2 a single discardable card.
+  // Player 2 should win because of the reverse card.
 });
