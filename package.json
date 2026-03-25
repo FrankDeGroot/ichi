@@ -4,9 +4,9 @@
   "description": "Hobby project to implement the Uno card game as a web application",
   "main": "dist/game/game.js",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "watch": "tsc -w -p tsconfig.json",
-    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "build": "tsgo -p tsconfig.json",
+    "watch": "tsgo -w -p tsconfig.json",
+    "typecheck": "tsgo --noEmit -p tsconfig.json",
     "test": "npm run build && node --test dist/game"
   },
   "repository": {
@@ -23,6 +23,6 @@
   "homepage": "https://github.com/FrankDeGroot/ichi#readme",
   "devDependencies": {
     "@types/node": "^25.5.0",
-    "typescript": "^6.0.2"
+    "@typescript/native-preview": "^7.0.0-dev.20260325.1"
   }
 }
