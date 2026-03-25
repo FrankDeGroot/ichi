@@ -14,7 +14,7 @@ export class Game {
   play() {
     const up = 1;
     const down = this.#players.length - 1;
-    const top = this.#discardPile.peekTop();
+    const top = this.#discardPile.peek();
     const direction = "specialCard" in top &&
         top.specialCard === "Reverse"
       ? down

@@ -1,10 +1,16 @@
 const colors = ["Blue", "Green", "Red", "Yellow"] as const;
 export type Color = (typeof colors)[number];
 export type ColoredCard = { color: Color };
+export function hasColor(card: Card) {
+  return "color" in card;
+}
 
 const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] as const;
 export type Digit = (typeof digits)[number];
 export type DigitCard = ColoredCard & { digit: Digit };
+export function hasDigit(card: Card) {
+  return "digit" in card;
+}
 const allDigitCards = colors.flatMap((color) =>
   digits.map((digit) => ({ color, digit }))
 );
@@ -15,12 +21,18 @@ const specialCards = ["Draw2", "Reverse", "Skip"] as const;
 export type SpecialCard = ColoredCard & {
   specialCard: (typeof specialCards)[number];
 };
+export function isSpecialCard(card: Card) {
+  return "specialCard" in card;
+}
 const allColoredSpecialCards = colors.flatMap((color) =>
   specialCards.map((specialCard) => ({ color, specialCard }))
 );
 
 const wildcards = ["Wild", "Draw4"] as const;
 export type Wildcard = { wildcard: (typeof wildcards)[number] };
+export function isWildCard(card: Card) {
+  return "wildcard" in card;
+}
 const allWildcards = wildcards.map((wildcard) => ({
   wildcard,
 }));

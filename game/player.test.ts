@@ -28,7 +28,7 @@ test("Should discard a card", () => {
     naiveDiscarder,
   );
   assert.ok(!player.turn());
-  assert.deepEqual(discardPile.peekTop(), {
+  assert.deepEqual(discardPile.peek(), {
     color: "Red",
     digit: 1,
   });
@@ -76,7 +76,7 @@ test("Should draw a card when none discardable and discard it if discardable", (
   }], discardPile);
   const player = new Player(name, hand, drawPile, discardPile, naiveDiscarder);
   assert.ok(!player.turn());
-  assert.deepEqual(discardPile.peekTop(), {
+  assert.deepEqual(discardPile.peek(), {
     color: "Red",
     digit: 3,
   });
@@ -94,7 +94,7 @@ test("Should return true when all card discarded", () => {
   const drawPile = new DrawPile([], discardPile);
   const player = new Player(name, hand, drawPile, discardPile, naiveDiscarder);
   assert.ok(player.turn());
-  assert.deepEqual(discardPile.peekTop(), {
+  assert.deepEqual(discardPile.peek(), {
     color: "Red",
     digit: 1,
   });

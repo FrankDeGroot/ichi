@@ -31,7 +31,7 @@ export default class Player {
 
   turn() {
     console.debug("Player", this.#name, "'s turn");
-    const top = this.#discardPile.peekTop();
+    const top = this.#discardPile.peek();
     console.debug("Player", this.#name, "discards on top of", top);
     const discarded = this.#discarder(this.#hand, top);
     if (discarded !== null) {

@@ -7,7 +7,7 @@ test("Should allow peek top card", () => {
     color: "Red",
     digit: 1,
   });
-  assert.deepEqual(pile.peekTop(), {
+  assert.deepEqual(pile.peek(), {
     color: "Red",
     digit: 1,
   });
@@ -22,7 +22,7 @@ test("Should discard to top of pile", () => {
     color: "Red",
     digit: 2,
   });
-  assert.deepEqual(pile.peekTop(), {
+  assert.deepEqual(pile.peek(), {
     color: "Red",
     digit: 2,
   });

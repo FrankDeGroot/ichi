@@ -8,13 +8,13 @@ export default class DiscardPile {
     this.#cards = [card];
   }
 
-  peekTop() {
+  peek() {
     return this.#cards[this.#cards.length - 1];
   }
 
   discard(card: Card) {
-    if (!discardable(card, this.peekTop())) {
-      throw new Error(`Attempt to discard ${card} on top of ${this.peekTop()}`);
+    if (!discardable(card, this.peek())) {
+      throw new Error(`Attempt to discard ${card} on top of ${this.peek()}`);
     }
     this.#cards.push(card);
   }
