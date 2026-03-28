@@ -19,17 +19,9 @@ resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2024-08-15' existi
   name: cosmosAccountName
 }
 
-resource cosmosSqlDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2024-08-15' = {
+resource cosmosSqlDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2024-08-15' existing = {
   parent: cosmosAccount
   name: cosmosSqlDatabaseName
-  properties: {
-    resource: {
-      id: cosmosSqlDatabaseName
-    }
-    options: {
-      throughput: 400
-    }
-  }
 }
 
 resource cosmosSqlContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2024-08-15' = {

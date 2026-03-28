@@ -18,7 +18,7 @@ param staticWebAppLocation string
 
 var staticWebAppName = name
 var cosmosAccountName = shared_name
-var cosmosSqlDatabaseName = name
+var cosmosSqlDatabaseName = shared_name
 var cosmosSqlContainerName = name
 var webPubSubName = name
 
