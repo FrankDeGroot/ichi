@@ -31,37 +31,13 @@ resource staticWebApp 'Microsoft.Web/staticSites@2024-04-01' = {
   }
 }
 
-resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2024-08-15' existing = {
-  name: cosmosAccountName
-}
-
-resource cosmosSqlDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2024-08-15' = {
-  parent: cosmosAccount
-  name: cosmosSqlDatabaseName
-  properties: {
-    resource: {
-      id: cosmosSqlDatabaseName
-    }
-    options: {
-      throughput: 400
-    }
-  }
-}
-
-resource cosmosSqlContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2024-08-15' = {
-  parent: cosmosSqlDatabase
-  name: cosmosSqlContainerName
-  properties: {
-    resource: {
-      id: cosmosSqlContainerName
-      partitionKey: {
-        paths: [
-          '/id'
-        ]
-        kind: 'Hash'
-        version: 2
-      }
-    }
+module cosmosResources './cosmos-resources.bicep' = {
+  name: 'cosmos-resources'
+  scope: resourceGroup(shared_name)
+  params: {
+    cosmosAccountName: cosmosAccountName
+    cosmosSqlDatabaseName: cosmosSqlDatabaseName
+    cosmosSqlContainerName: cosmosSqlContainerName
   }
 }
 
@@ -80,7 +56,7 @@ resource webPubSub 'Microsoft.SignalRService/webPubSub@2024-03-01' = {
 }
 
 output staticWebAppHostname string = staticWebApp.properties.defaultHostname
-output cosmosEndpoint string = cosmosAccount.properties.documentEndpoint
-output cosmosDatabaseName string = cosmosSqlDatabaseName
-output cosmosContainerName string = cosmosSqlContainerName
+output cosmosEndpoint string = cosmosResources.outputs.cosmosEndpoint
+output cosmosDatabaseName string = cosmosResources.outputs.cosmosDatabaseName
+output cosmosContainerName string = cosmosResources.outputs.cosmosContainerName
 output webPubSubHostName string = webPubSub.properties.hostName
