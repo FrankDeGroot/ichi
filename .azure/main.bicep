@@ -1,18 +1,23 @@
 targetScope = 'resourceGroup'
 
-@description('Base name for all resources. Default is ichi to match the project name.')
+@description('Base name for all resources.')
 @minLength(3)
 @maxLength(44)
-param name string = 'ichi'
+param name string
+
+@description('Name of shared existing Cosmos resources (account, SQL database, and container) in this resource group.')
+@minLength(3)
+@maxLength(44)
+param shared_name string
 
 @description('Azure region for Cosmos DB and Web PubSub.')
 param location string = resourceGroup().location
 
 @description('Azure region for Static Web App. Use a region supported by Static Web Apps (for example westeurope).')
-param staticWebAppLocation string = 'westeurope'
+param staticWebAppLocation string
 
 var staticWebAppName = name
-var cosmosAccountName = toLower(name)
+var cosmosAccountName = shared_name
 var cosmosSqlDatabaseName = name
 var cosmosSqlContainerName = name
 var webPubSubName = name
@@ -26,25 +31,8 @@ resource staticWebApp 'Microsoft.Web/staticSites@2024-04-01' = {
   }
 }
 
-resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2024-08-15' = {
+resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2024-08-15' existing = {
   name: cosmosAccountName
-  location: location
-  kind: 'GlobalDocumentDB'
-  properties: {
-    databaseAccountOfferType: 'Standard'
-    enableFreeTier: true
-    consistencyPolicy: {
-      defaultConsistencyLevel: 'Session'
-    }
-    locations: [
-      {
-        locationName: location
-        failoverPriority: 0
-        isZoneRedundant: false
-      }
-    ]
-    publicNetworkAccess: 'Enabled'
-  }
 }
 
 resource cosmosSqlDatabase 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2024-08-15' = {

@@ -2,15 +2,6 @@ name: Deploy Bicep
 
 on:
   workflow_dispatch:
-    inputs:
-      resource_group:
-        description: Azure resource group name
-        required: false
-        default: ichi
-      location:
-        description: Azure region for the resource group
-        required: false
-        default: westeurope
   push:
     branches:
     - main
@@ -42,26 +33,35 @@ jobs:
       with:
         azcliversion: latest
         inlineScript: |
-          RG_NAME="${{ github.event.inputs.resource_group }}"
-          RG_LOCATION="${{ github.event.inputs.location }}"
+          RG_NAME="${{ vars.AZURE_RESOURCE_GROUP }}"
+          RG_LOCATION="${{ vars.AZURE_LOCATION }}"
+          SHARED_RG_NAME="${{ vars.SHARED_AZURE_RESOURCE_GROUP }}"
 
           if [ -z "$RG_NAME" ]; then
-            RG_NAME="${{ vars.AZURE_RESOURCE_GROUP }}"
-          fi
-          if [ -z "$RG_NAME" ]; then
-            RG_NAME="ichi"
+            echo "Error: Repository variable AZURE_RESOURCE_GROUP is not set." >&2
+            exit 1
           fi
 
           if [ -z "$RG_LOCATION" ]; then
-            RG_LOCATION="${{ vars.AZURE_LOCATION }}"
+            echo "Error: Repository variable AZURE_LOCATION is not set." >&2
+            exit 1
           fi
-          if [ -z "$RG_LOCATION" ]; then
-            RG_LOCATION="westeurope"
+
+          if [ -z "$SHARED_RG_NAME" ]; then
+            echo "Error: Repository variable SHARED_AZURE_RESOURCE_GROUP is not set." >&2
+            exit 1
+          fi
+
+          if [ ! -f ".azure/main.bicep" ]; then
+            echo "Error: .azure/main.bicep was not found." >&2
+            exit 1
           fi
 
           echo "Deploying to resource group: $RG_NAME in location: $RG_LOCATION"
+          echo "Using shared Cosmos resources from: $SHARED_RG_NAME"
 
           az group create --name "$RG_NAME" --location "$RG_LOCATION"
           az deployment group create \
             --resource-group "$RG_NAME" \
-            --parameters .azure/main.bicepparam
+            --template-file .azure/main.bicep \
+            --parameters name="$RG_NAME" shared_name="$SHARED_RG_NAME" staticWebAppLocation="$RG_LOCATION"
