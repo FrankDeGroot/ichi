@@ -25,6 +25,7 @@ var webPubSubName = name
 resource staticWebApp 'Microsoft.Web/staticSites@2024-04-01' = {
   name: staticWebAppName
   location: staticWebAppLocation
+  properties: {}
   sku: {
     name: 'Free'
     tier: 'Free'
