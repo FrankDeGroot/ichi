@@ -38,6 +38,9 @@ resource cosmosSqlContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/
         version: 2
       }
     }
+    options: {
+      throughput: 500
+    }
   }
 }
 
