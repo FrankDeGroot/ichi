@@ -5,12 +5,12 @@ Purpose: shared, agent-agnostic context for contributors working on this reposit
 ## Project intent
 - Build an Uno-like game engine in TypeScript under game/.
 - Keep game logic deterministic and testable.
-- Treat browser code in web/ as secondary integration code for now.
+- Treat browser code in swa/ as secondary integration code for now.
 
 ## Source of truth
 - Core rules, behavior, and invariants live in game/ and game/*.test.ts.
-- If README or web/ code conflicts with game/ tests, prefer game/ tests.
-- The file web/index.js is legacy and may not represent current architecture.
+- If README or swa/ code conflicts with game/ tests, prefer game/ tests.
+- The file swa/index.js is legacy and may not represent current architecture.
 
 ## Working agreements
 - Prefer small, behavior-preserving changes.
@@ -28,9 +28,9 @@ Purpose: shared, agent-agnostic context for contributors working on this reposit
 - Turn execution is on Player.turn(), loop orchestration is in Game.play().
 
 ## Legacy web note
-- Do not infer game rules from web/index.js.
-- Do not refactor game logic to match web/index.js behavior.
-- If touching web/, keep changes minimal unless asked for a web modernization task.
+- Do not infer game rules from swa/index.js.
+- Do not refactor game logic to match swa/index.js behavior.
+- If touching swa/, keep changes minimal unless asked for a web modernization task.
 
 ## Preferred change flow
 1. Read nearby tests first.

@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>Ichi</title>
+    <meta charset=utf-8>
+    <meta name=viewport content=width=device-width>
+    <link rel=stylesheet href=index.css>
+    <script>
+      window.onerror = (message, source, line, column, error) => {
+        document.body.innerHTML = `<main>${message} ${source}:${line}:${column}<main>`
+        return true
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Ichi</h1>
+    <div data=message></div>
+    <button id=start>start</button>
+    <script type=module src=index.js></script>
+  </body>
+</html>

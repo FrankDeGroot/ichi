@@ -14,6 +14,13 @@ The infrastructure template is in `.azure/main.bicep`.
 The template assumes the following already exists:
 - An existing Azure Cosmos DB account in the target resource group (passed as `shared_name`)
 
+## Azure Static Web Apps API runtime (Node.js)
+For managed APIs in Azure Static Web Apps, this project uses only the latest currently supported Node.js runtime: `node:22`.
+
+Runtime configuration is defined in `swa/staticwebapp.config.json`.
+
+Reference: https://learn.microsoft.com/azure/static-web-apps/languages-runtimes (checked 2026-04-02).
+
 ## Deploy
 ```powershell
 az group create --name ichi --location westeurope

@@ -4,13 +4,11 @@
 	},
 	"customizations": {
 		"vscode": {
-			"extensions": [
-				"denoland.vscode-deno"
-			]
+			"extensions": []
 		}
 	},
 	"runArgs": [
-		"--name=vscode-deno-ichi"
+		"--name=vscode-node22-ichi"
 	],
-	"postCreateCommand": "deno install"
+	"postCreateCommand": "npm ci"
 }

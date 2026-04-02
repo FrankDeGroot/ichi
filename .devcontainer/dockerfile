@@ -1,2 +1,2 @@
-FROM denoland/deno:latest
+FROM node:22-bookworm
 RUN apt update && apt install git -y

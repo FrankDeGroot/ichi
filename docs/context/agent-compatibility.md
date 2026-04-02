@@ -23,7 +23,7 @@ As of 2026-04-02, this is a practical compatibility guide for instruction discov
 
 ## High-value shared constraints to mirror
 - game/ tests are source of truth for game behavior.
-- web/index.js is legacy and must not define game rules.
+- swa/index.js is legacy and must not define game rules.
 - behavior changes require tests.
 - prefer small, behavior-preserving edits.
 
