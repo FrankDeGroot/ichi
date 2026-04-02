@@ -1,2 +1,3 @@
 FROM node:22-bookworm
-RUN apt update && apt install git -y
+# Installing promise-retry is a temp fix to be able to upgrade.
+RUN apt update && apt install git -y && npm install -g promise-retry npm@latest && npm uninstall -g promise-retry
