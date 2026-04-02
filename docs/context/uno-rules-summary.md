@@ -47,6 +47,10 @@ Purpose: compact, implementation-oriented summary for coding agents.
 - Wild Shuffle Hands: collect all hands, shuffle, redeal from left of current player, preserve current direction, choose next color.
 - Wild Customizable: prewritten custom effect applies; also choose next color.
 
+## Current repository support status
+- Wild Customizable cards are not yet supported in this codebase.
+- Agents should not implement or assume custom-rule execution unless explicitly requested.
+
 ## UNO call and penalty
 - When a player reaches one card, they must call UNO.
 - If caught before next player begins turn, penalized player draws 2.
