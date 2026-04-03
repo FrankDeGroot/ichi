@@ -34,21 +34,21 @@ test("Different digits or colors not discardable", () => {
   );
 });
 
-test("Same color discardable for special cards", () => {
+test("Same color discardable for action cards", () => {
   assert.ok(discardable({
     color: "Red",
-    specialCard: "Draw2",
+    actionCard: "Draw2",
   }, {
     color: "Red",
     digit: 1,
   }));
 });
 
-test("Different color not discardable for special cards", () => {
+test("Different color not discardable for action cards", () => {
   assert.ok(
     !discardable({
       color: "Red",
-      specialCard: "Draw2",
+      actionCard: "Draw2",
     }, {
       color: "Blue",
       digit: 1,
@@ -56,24 +56,24 @@ test("Different color not discardable for special cards", () => {
   );
 });
 
-test("Same specialCard is discardable", () => {
+test("Same actionCard is discardable", () => {
   assert.ok(discardable({
     color: "Red",
-    specialCard: "Draw2",
+    actionCard: "Draw2",
   }, {
     color: "Yellow",
-    specialCard: "Draw2",
+    actionCard: "Draw2",
   }));
 });
 
-test("Different specialCard is not discardable", () => {
+test("Different actionCard is not discardable", () => {
   assert.ok(
     !discardable({
       color: "Blue",
-      specialCard: "Reverse",
+      actionCard: "Reverse",
     }, {
       color: "Red",
-      specialCard: "Draw2",
+      actionCard: "Draw2",
     }),
   );
 });

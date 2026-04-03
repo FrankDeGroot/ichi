@@ -68,7 +68,7 @@ test("A Reverse on top of the discard pile should reverse turn direction", () =>
   const { discardPile, drawPile, players } = testDeal({
     top: {
       color: "Red",
-      specialCard: "Reverse",
+      actionCard: "Reverse",
     },
     draw: [],
     hands: [[{

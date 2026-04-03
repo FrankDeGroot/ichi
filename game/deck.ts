@@ -17,15 +17,15 @@ const allDigitCards = colors.flatMap((color) =>
 const allNonZeroDigitCards = allDigitCards
   .filter((card) => card.digit !== 0);
 
-const specialCards = ["Draw2", "Reverse", "Skip"] as const;
-export type SpecialCard = ColoredCard & {
-  specialCard: (typeof specialCards)[number];
+const actionCards = ["Draw2", "Reverse", "Skip"] as const;
+export type ActionCard = ColoredCard & {
+  actionCard: (typeof actionCards)[number];
 };
-export function isSpecialCard(card: Card) {
-  return "specialCard" in card;
+export function isActionCard(card: Card) {
+  return "actionCard" in card;
 }
-const allColoredSpecialCards = colors.flatMap((color) =>
-  specialCards.map((specialCard) => ({ color, specialCard }))
+const allColoredActionCards = colors.flatMap((color) =>
+  actionCards.map((actionCard) => ({ color, actionCard }))
 );
 
 const wildcards = ["Wild", "Draw4"] as const;
@@ -37,7 +37,7 @@ const allWildcards = wildcards.map((wildcard) => ({
   wildcard,
 }));
 
-export type Card = DigitCard | SpecialCard | Wildcard;
+export type Card = DigitCard | ActionCard | Wildcard;
 
 function duplicate<T>(count: number, array: T[]) {
   return Array(count).fill(array).flatMap((o) => o);
@@ -46,7 +46,7 @@ function duplicate<T>(count: number, array: T[]) {
 export const deck: readonly Card[] = allDigitCards
   .concat(
     allNonZeroDigitCards,
-    duplicate(2, allColoredSpecialCards),
+    duplicate(2, allColoredActionCards),
     duplicate(4, allWildcards),
   );
 
