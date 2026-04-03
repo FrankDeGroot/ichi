@@ -2,14 +2,23 @@
   "name": "ichi",
   "version": "1.0.0",
   "description": "Hobby project to implement the Uno card game as a web application",
+  "private": true,
   "main": "dist/game/game.js",
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "tsgo -p tsconfig.json",
-    "watch": "tsgo -w -p tsconfig.json",
-    "typecheck": "tsgo --noEmit -p tsconfig.json",
-    "test": "npm run build && node --test dist/game/*.test.js"
+    "build": "npm run -w game build",
+    "watch": "npm run -w game watch",
+    "typecheck": "npm run -w game typecheck",
+    "test": "npm run -w game test",
+    "build:game": "npm run -w game build",
+    "typecheck:game": "npm run -w game typecheck",
+    "test:game": "npm run -w game test",
+    "build:swa": "npm run -w swa build"
   },
+  "workspaces": [
+    "game",
+    "swa"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FrankDeGroot/ichi.git"

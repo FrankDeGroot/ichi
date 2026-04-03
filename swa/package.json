@@ -1,0 +1,8 @@
+{
+  "name": "@ichi/swa",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node -e \"console.log('swa is static; no build step configured')\""
+  }
+}
