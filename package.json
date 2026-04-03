@@ -4,10 +4,11 @@
   "description": "Hobby project to implement the Uno card game as a web application",
   "main": "dist/game/game.js",
   "scripts": {
+    "clean": "rm -rf dist",
     "build": "tsgo -p tsconfig.json",
     "watch": "tsgo -w -p tsconfig.json",
     "typecheck": "tsgo --noEmit -p tsconfig.json",
-    "test": "npm run build && node --test dist/game"
+    "test": "npm run build && node --test dist/game/*.test.js"
   },
   "repository": {
     "type": "git",

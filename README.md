@@ -3,11 +3,6 @@ Hobby project to implement the Uno card game as a web application
 
 # overview index
 - [AGENTS.md](AGENTS.md)
-- [game context: game loop](docs/context/game-loop.md)
-- [game context: card lifecycle](docs/context/card-lifecycle.md)
-- [game context: glossary](docs/context/glossary.md)
-- [game context: uno rules summary](docs/context/uno-rules-summary.md)
-- [infrastructure context](docs/context/infrastructure.md)
 - [agent compatibility matrix](docs/context/agent-compatibility.md)
 - [copilot instruction: game domain](.github/instructions/game-domain.instructions.md)
 - [copilot instruction: testing](.github/instructions/testing.instructions.md)
@@ -19,6 +14,3 @@ Hobby project to implement the Uno card game as a web application
 - https://www.unorules.org/
 - https://www.unorules.com/
 - https://unorules.net/
-
-# infrastructure
-Infrastructure details were moved to [docs/context/infrastructure.md](docs/context/infrastructure.md).

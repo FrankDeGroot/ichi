@@ -1,4 +1,4 @@
-# Glossary
+# 12. Glossary
 
 - Card: one of digit card, colored special card, or wildcard.
 - Top card: current visible card on discard pile that constrains legal discards.
