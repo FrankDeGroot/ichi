@@ -37,7 +37,7 @@ test("Different digits or colors not discardable", () => {
 test("Same color discardable for action cards", () => {
   assert.ok(discardable({
     color: "Red",
-    actionCard: "Draw2",
+    action: "Draw2",
   }, {
     color: "Red",
     digit: 1,
@@ -48,7 +48,7 @@ test("Different color not discardable for action cards", () => {
   assert.ok(
     !discardable({
       color: "Red",
-      actionCard: "Draw2",
+      action: "Draw2",
     }, {
       color: "Blue",
       digit: 1,
@@ -59,10 +59,10 @@ test("Different color not discardable for action cards", () => {
 test("Same actionCard is discardable", () => {
   assert.ok(discardable({
     color: "Red",
-    actionCard: "Draw2",
+    action: "Draw2",
   }, {
     color: "Yellow",
-    actionCard: "Draw2",
+    action: "Draw2",
   }));
 });
 
@@ -70,10 +70,10 @@ test("Different actionCard is not discardable", () => {
   assert.ok(
     !discardable({
       color: "Blue",
-      actionCard: "Reverse",
+      action: "Reverse",
     }, {
       color: "Red",
-      actionCard: "Draw2",
+      action: "Draw2",
     }),
   );
 });

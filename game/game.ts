@@ -1,4 +1,5 @@
 import { Dealing } from "./dealer.ts";
+import { isActionCard } from "./deck.ts";
 
 export class Game {
   #discardPile;
@@ -15,8 +16,8 @@ export class Game {
     const up = 1;
     const down = this.#players.length - 1;
     const top = this.#discardPile.peek();
-    const direction = "actionCard" in top &&
-        top.actionCard === "Reverse"
+    const direction = isActionCard(top) &&
+        top.action === "Reverse"
       ? down
       : up;
     for (let i = 0;; i = (i + direction) % this.#players.length) {

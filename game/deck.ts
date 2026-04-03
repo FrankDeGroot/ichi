@@ -19,13 +19,13 @@ const allNonZeroDigitCards = allDigitCards
 
 const actionCards = ["Draw2", "Reverse", "Skip"] as const;
 export type ActionCard = ColoredCard & {
-  actionCard: (typeof actionCards)[number];
+  action: (typeof actionCards)[number];
 };
 export function isActionCard(card: Card) {
-  return "actionCard" in card;
+  return "action" in card;
 }
 const allColoredActionCards = colors.flatMap((color) =>
-  actionCards.map((actionCard) => ({ color, actionCard }))
+  actionCards.map((action) => ({ color, action }))
 );
 
 const wildcards = ["Wild", "Draw4"] as const;
