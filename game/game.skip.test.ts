@@ -3,21 +3,18 @@ import test from "node:test";
 import { Game } from "./game.ts";
 import { testDeal } from "./test-deal.ts";
 
-test("A Reverse on top of the discard pile should reverse turn direction", () => {
-  // Reverse starts on top, so play order is 0 -> 2 -> 1 and Player 2 goes out first.
+test("A Skip on top of the discard pile should skip the first player's turn", () => {
+  // Skip starts on top, so Player 0 is skipped and Player 1 plays and wins immediately.
   const { discardPile, drawPile, players } = testDeal({
     top: {
       color: "Red",
-      action: "Reverse",
+      action: "Skip",
     },
     draw: [],
     hands: [
       // Player 0
       [{
         color: "Red",
-        digit: 1,
-      }, {
-        color: "Blue",
         digit: 1,
       }],
       // Player 1
@@ -34,11 +31,11 @@ test("A Reverse on top of the discard pile should reverse turn direction", () =>
   });
 
   const game = new Game({ discardPile, drawPile, players });
-  assert.strictEqual(game.play().name, players[2].name);
+  assert.strictEqual(game.play().name, players[1].name);
 });
 
-test("Discarding a reverse card should reverse direction only when it is discarded", () => {
-  // Player 0 first discards Reverse, flipping order so Player 2 plays next and wins.
+test("Discarding a skip card should skip exactly one next turn", () => {
+  // Player 0 discards Skip, Player 1 is skipped, and Player 2 plays next and wins.
   const { discardPile, drawPile, players } = testDeal({
     top: {
       color: "Red",
@@ -52,7 +49,7 @@ test("Discarding a reverse card should reverse direction only when it is discard
         digit: 5,
       }, {
         color: "Red",
-        action: "Reverse",
+        action: "Skip",
       }],
       // Player 1
       [{
@@ -71,8 +68,8 @@ test("Discarding a reverse card should reverse direction only when it is discard
   assert.strictEqual(game.play().name, players[2].name);
 });
 
-test("A reverse card should not reverse direction again when it stays on top after a draw", () => {
-  // Player 0 plays Reverse, Player 2 cannot play and draws, then Player 1 wins without another flip.
+test("A skip card should not skip again when it stays on top after a draw", () => {
+  // Player 0 plays Skip, Player 2 is skipped once after drawing, then Player 0 wins on next turn.
   const { discardPile, drawPile, players } = testDeal({
     top: {
       color: "Red",
@@ -85,14 +82,11 @@ test("A reverse card should not reverse direction again when it stays on top aft
     hands: [
       // Player 0
       [{
-        color: "Blue",
-        digit: 5,
-      }, {
         color: "Red",
-        action: "Reverse",
+        action: "Skip",
       }, {
         color: "Blue",
-        action: "Reverse",
+        action: "Skip",
       }],
       // Player 1
       [{
@@ -101,12 +95,41 @@ test("A reverse card should not reverse direction again when it stays on top aft
       }],
       // Player 2
       [{
-        color: "Blue",
+        color: "Green",
         digit: 2,
       }],
     ],
   });
 
   const game = new Game({ discardPile, drawPile, players });
-  assert.strictEqual(game.play().name, players[1].name);
+  assert.strictEqual(game.play().name, players[0].name);
+});
+
+test("In a two-player game, discarding skip should make the same player play again", () => {
+  // Player 0 discards Skip, Player 1 is skipped, and Player 0 takes the next turn and wins.
+  const { discardPile, drawPile, players } = testDeal({
+    top: {
+      color: "Red",
+      digit: 9,
+    },
+    draw: [],
+    hands: [
+      // Player 0
+      [{
+        color: "Red",
+        action: "Skip",
+      }, {
+        color: "Blue",
+        action: "Skip",
+      }],
+      // Player 1
+      [{
+        color: "Red",
+        digit: 1,
+      }],
+    ],
+  });
+
+  const game = new Game({ discardPile, drawPile, players });
+  assert.strictEqual(game.play().name, players[0].name);
 });

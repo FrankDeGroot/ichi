@@ -29,6 +29,12 @@ export default class Player {
     return this.#name;
   }
 
+  draw() {
+    const drawn = this.#drawPile.draw();
+    console.debug("Player", this.#name, "drawing", drawn);
+    this.#hand.add(drawn);
+  }
+
   turn() {
     console.debug("Player", this.#name, "'s turn");
     const top = this.#discardPile.peek();
